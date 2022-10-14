@@ -1,12 +1,12 @@
 import { RouteRecordRaw } from 'vue-router';
-const Helloword = () => import('@/views/helloword.vue')
+const Index = () => import('@/views/index.vue')
 const baseRoute: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'helloword',
-    component: Helloword,
+    name: 'Index',
+    component: Index,
     meta: {
-      title: 'helloword',
+      title: 'Index',
     }
   }
 ];
