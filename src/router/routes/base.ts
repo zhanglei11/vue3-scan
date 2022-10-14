@@ -2,25 +2,26 @@ import { RouteRecordRaw } from 'vue-router';
 const ERROR403 = () => import('@/views/error/403.vue');
 const ERROR404 = () => import('@/views/error/404.vue');
 const ERROR500 = () => import('@/views/error/500.vue');
-const Login = () => import('@/views/login/index.vue');
+const Helloword = () => import('@/views/plug/helloword.vue')
+
 const baseRoute: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login',
+    redirect: '/plug',
     meta: {
       title: '/',
       keepAlive: true
     }
-  },
-  {
-    path: '/login',
-    name: 'LOGIN',
-    component: Login,
+  }, {
+    path: '/plug',
+    name: 'helloword',
+    component: Helloword,
     meta: {
-      title: '登录',
+      title: 'helloword',
       keepAlive: true
     }
   },
+
   {
     path: '/403',
     name: 'ERROR403',
