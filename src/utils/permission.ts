@@ -25,7 +25,6 @@ const registerRouteGuard = (router: Router) => {
    * 全局后置守卫
    */
   router.afterEach((to: any, from: any, failure: any) => {
-    // 改标题,监控上报一些基础信息
     document.title = to.meta.title;
     NProgress.done();
   });

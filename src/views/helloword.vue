@@ -7,7 +7,7 @@
 </template>
 <script lang="ts" setup>
 import { ref  } from "vue";
-import Scaner from "./GetQrcode.vue";
+import Scaner from "@/components/Qrcode.vue";
 const showScaner = ref(true)
 // 扫码成功
 const codeScanned = (code) => {

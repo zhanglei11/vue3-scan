@@ -7,7 +7,6 @@ import '@/styles/index.less'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
-import 'vxe-table/lib/style.css'
 const app = createApp(App)
 
 app.use(router)
