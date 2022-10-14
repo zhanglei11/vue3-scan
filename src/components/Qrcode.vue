@@ -19,13 +19,12 @@
 <script lang="ts" setup>
 import { ref, reactive, onMounted, onUnmounted, onBeforeUnmount } from "vue";
 import jsQR from "jsqr";
-
 const showPlay = ref(true);
 const spinning = ref(false);
 const canvas = ref();
 const videoWH = reactive({
   width: document.documentElement.clientWidth,
-  height: document.documentElement.clientHeight - 48,
+  height: document.documentElement.clientHeight,
 });
 const canvasRef = ref();
 const videoRef = ref();
@@ -63,15 +62,16 @@ const tick = () => {
   const imageData = canvas.value.getImageData(
     0,
     0,
-    canvasRef.value.width,
-    canvasRef.value.height
+    canvasRef.value?.width,
+    canvasRef.value?.height
   );
   let code = false;
   try {
-    code = jsQR(imageData.data, imageData.width, imageData.height);
+    code = jsQR(imageData.data, imageData.width, imageData?.height);
   } catch (e) {
     console.error(e);
   }
+  // console.log("code", code);
   if (code) {
     drawBox(code.location);
     found(code.data);
@@ -114,6 +114,7 @@ const setup = () => {
           })
           .catch((error) => {
             emits("errorCaptured", error);
+            fullStop();
           });
       });
   }
@@ -125,20 +126,19 @@ const run = () => {
 };
 const found = (code) => {
   emits("codeScanned", code);
+  fullStop();
 };
 // 完全停止
 const fullStop = () => {
-  // if (videoRef.value && videoRef.value.srcObject) {
-  // }
-  videoRef.value.srcObject.getTracks().forEach((t) => t.stop());
+  if (videoRef.value && videoRef.value.srcObject) {
+    videoRef.value.srcObject.getTracks().forEach((t) => t.stop());
+  }
 };
 onBeforeUnmount(() => {
-  console.log("6665556");
   fullStop();
 });
 
 onUnmounted(() => {
-  console.log("6666");
   fullStop();
 });
 </script>
